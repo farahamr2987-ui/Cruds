@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <style>
+    :root {
+      --bg: #FBF8F3;
+      --ink: #2E2A26;
+      --line: #E4DCD0;
+      --field-bg: #F1E9DC;
+      --field-border: #C9A97E;
+      --accent: #B25B4C;
+      --accent-dark: #8F4438;
+      --muted: #8A8074;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+    }
+
+    h1.title {
+      text-align: center;
+      letter-spacing: 14px;
+      font-weight: 600;
+      font-size: 32px;
+      padding: 40px 0 30px;
+      margin: 0;
+      color: var(--accent-dark);
+    }
+
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      display: block;
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto 18px;
+      padding: 14px 22px;
+      border-radius: 30px;
+      border: 1px solid var(--field-border);
+      background: var(--field-bg);
+      color: var(--ink);
+      font-size: 15px;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: var(--muted);
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(178, 91, 76, 0.15);
+    }
+
+    .row-with-total {
+      display: flex;
+      align-items: center;
+      max-width: 700px;
+      margin: 0 auto;
+      gap: 16px;
+    }
+
+    .row-with-total input {
+      margin-bottom: 0;
+      flex: 1;
+    }
+
+    .total-label {
+      font-weight: 600;
+      color: var(--accent-dark);
+      white-space: nowrap;
+    }
+
+    button {
+      display: block;
+      margin: 0 auto 18px;
+      padding: 14px 40px;
+      border-radius: 30px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background .2s ease, transform .1s ease;
+    }
+
+    button:hover {
+      background: var(--accent-dark);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .btn-row button {
+      padding: 12px 26px;
+    }
+
+    table {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    .file-field {
+      max-width: 700px;
+      margin: 0 auto 18px;
+    }
+
+    .file-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    input[type="file"] {
+      display: block;
+      width: 100%;
+      padding: 12px 22px;
+      border-radius: 30px;
+      border: 1px dashed var(--field-border);
+      background: var(--field-bg);
+      color: var(--muted);
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    input[type="file"]::file-selector-button {
+      padding: 8px 20px;
+      margin-right: 14px;
+      border: none;
+      border-radius: 20px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    input[type="file"]::file-selector-button:hover {
+      background: var(--accent-dark);
+    }
+
+    th {
+      padding: 14px 10px;
+      color: var(--accent-dark);
+      font-weight: 700;
+      letter-spacing: 1px;
+      border-bottom: 2px solid var(--field-border);
+    }
+
+    td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 class="title">CRUDS</h1>
+
+  <div class="section">
+    <input id="title" type="text" placeholder="Title">
+  </div>
+
+  <div class="section">
+    <input onkeyup="getTotal()" id="price" type="text" placeholder="Price">
+    <input id="taxs" onkeyup="getTotal()" type="text" placeholder="Taxs">
+    <input id="ads" onkeyup="getTotal()" type="text" placeholder="Ads">
+    <div class="row-with-total">
+      <input onkeyup="getTotal()" id="discount" type="text" placeholder="Discount">
+      <span id="total" class="total-label">Total:</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <input id="count" type="text" placeholder="Count">
+    <input id="category" type="text" placeholder="Category">
+    <div class="file-field">
+      <span class="file-label">Image</span>
+      <input id="img" type="file">
+    </div>
+    <button id="create">create</button>
+    <input id="search" type="text" placeholder="Search">
+  </div>
+
+  <div class="section">
+    <div class="btn-row">
+      <button id="searchTitle">search by title</button>
+      <button id="searchCategory">search by category</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <table id="tableB">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Taxes</th>
+          <th>ADS</th>
+          <th>Discount</th>
+          <th>Category</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+
+  <script>
+    let title = document.getElementById('title')
+    let price = document.getElementById('price')
+    let taxs = document.getElementById('taxs')
+    let ads = document.getElementById('ads')
+    let discount = document.getElementById('discount')
+    let total = document.getElementById('total')
+    let create = document.getElementById('create')
+    let category = document.getElementById('category')
+    let img = document.getElementById('img')
+    let count = document.getElementById('count')
+    let tableBody = document.getElementById('tableBody')
+
+    let mood="create"
+    let temp
+
+    let products;
+
+    if (localStorage.shop != null) {
+      products = JSON.parse(localStorage.shop)
+    } else {
+      products = []
+    }
+
+    create.onclick = function () {
+
+      let objProduct = {
+        title: title.value,
+        price: price.value,
+        taxs: taxs.value,
+        ads: ads.value,
+        count: count.value,
+        discount: discount.value,
+        category: category.value,
+        img: img.value
+      }
+ if(mood==="create"){
+  
+      if (objProduct.count > 1) {
+        for (let i = 0; i < objProduct.count; i++) {
+          products.push(objProduct);
+        }
+      } else {
+        products.push(objProduct)
+      }
+
+ }else{
+products[temp]=objProduct
+  create.innerHTML="create"
+  count.style.display="block"
+  mood='create'
+ }
+      localStorage.setItem('shop', JSON.stringify(products))
+      getTableB()
+    }
+
+    
+
+
+
+    function getTotal() {
+      let price1 = +price.value + +taxs.value + +ads.value - +discount.value
+      total.innerHTML = ` Total: ${price1}`
+    }
+
+    function getTableB() {
+
+      let table = ''
+      for (let x = 0; x < products.length; x++) {
+        table += `
+        <tr>
+          <td>${x}</td>
+          <td>${products[x].img}</td>
+          <td>${products[x].title}</td>
+          <td>${products[x].price}</td>
+          <td>${products[x].taxs}</td>
+          <td>${products[x].ads}</td>
+          <td>${products[x].discount}</td>
+          <td>${products[x].category}</td>
+          <td><button class="btntable" onclick="updateProducts(${x})" >Update</button></td>
+          <td><button class="btntable" onclick="deleteProducts(${x})">Delete</button></td>
+        </tr>
+        `
+      }
+
+      tableBody.innerHTML = table
+    }
+    getTableB()
+
+    function deleteProducts(x) {
+      products.splice(x, 1)
+      localStorage.setItem('shop', JSON.stringify(products))
+      getTableB()
+    }
+
+    function updateProducts(x){
+title.value=products[x].title
+price.value=products[x].price
+ads.value=products[x].ads
+taxs.value=products[x].taxs
+discount.value=products[x].discount
+category.value=products[x].category
+count.style.display="none"
+getTotal()
+temp=x
+create.innerHTML="Update"
+mood='update'
+    }
+
+  </script>
+
+</body>
+
+</html>
