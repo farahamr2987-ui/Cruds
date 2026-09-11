@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Gallery</title>
+
+<style>
+  img{
+    width: 400px;
+    height: 300px;
+    display: block;
+    margin: 10px 0;
+  }
+</style>
+</head>
+
+<body>
+
+ 
+
+<button id="before">Before</button>
+<button id="next">Next</button>
+
+<img id="main" src="https://i.pinimg.com/736x/d6/ea/b5/d6eab5b66245e524fda5265ab5c815a8.jpg">
+
+ 
+
+<script>
+  let images = [
+    "https://i.pinimg.com/736x/2c/8d/22/2c8d221621ddee46704ef46e4d1966b8.jpg",
+    "https://i.pinimg.com/736x/59/dc/12/59dc127479d860974e27c241a5efdc88.jpg",
+    "https://i.pinimg.com/736x/3e/0a/08/3e0a088f680780773b30ad578dceab31.jpg",
+    "https://i.pinimg.com/736x/d6/ea/b5/d6eab5b66245e524fda5265ab5c815a8.jpg"
+  ];
+
+  let index = 0;
+  let main = document.getElementById("main");
+
+  document.getElementById("next").onclick = function(){
+    index++;
+    if(index >= images.length){
+      index = 0;
+    }
+    main.src = images[index];
+  }
+
+  document.getElementById("before").onclick = function(){
+    index--;
+    if(index < 0){
+      index = images.length - 1;
+    }
+    main.src = images[index];
+  }
+</script>
+
+</body>
+</html>

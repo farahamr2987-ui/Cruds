@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ملاحظاتي</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a12;
+  --surface:#141420;
+  --surface2:#1b1b2a;
+  --surface3:#222234;
+  --border:rgba(255,255,255,.07);
+  --border2:rgba(255,255,255,.13);
+  --accent:#6c63ff;
+  --accent2:#9b93ff;
+  --dim:rgba(108,99,255,.15);
+  --done:#34d399;
+  --done-bg:rgba(52,211,153,.1);
+  --danger:#f87171;
+  --danger-bg:rgba(248,113,113,.1);
+  --text:#e2e0f0;
+  --text2:#7e7a9a;
+  --text3:#3f3c55;
+  --r:16px;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --spring:cubic-bezier(.34,1.45,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased}
+body{display:flex;justify-content:center;padding:32px 16px}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+.wrap{width:100%;max-width:520px}
+
+.hero{text-align:center;margin-bottom:26px;animation:fadeUp .5s var(--spring) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero-ico{width:54px;height:54px;background:var(--surface2);border:1px solid rgba(108,99,255,.3);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:24px}
+.hero h1{font-family:'Outfit',sans-serif;font-size:26px;font-weight:600;letter-spacing:-.5px;margin-bottom:4px}
+.hero h1 span{color:var(--accent2)}
+.hero p{font-size:12.5px;color:var(--text2)}
+
+.add-box{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:16px;margin-bottom:18px;box-shadow:0 20px 50px rgba(0,0,0,.35);animation:fadeUp .5s var(--spring) .06s both}
+.add-ta{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--text);outline:none;resize:vertical;min-height:64px;line-height:1.55;transition:all .2s var(--ease)}
+.add-ta:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(108,99,255,.12)}
+.add-ta::placeholder{color:var(--text3)}
+.add-row{display:flex;justify-content:flex-end;align-items:center;margin-top:10px;gap:8px}
+.char-count{font-size:11px;color:var(--text3);margin-left:auto}
+.add-btn{display:flex;align-items:center;gap:7px;background:var(--accent);color:#fff;border:none;padding:10px 20px;border-radius:10px;font-family:'Outfit',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .25s var(--spring)}
+.add-btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.add-btn:active{transform:scale(.97)}
+.add-btn .plus{font-size:17px;font-weight:300;line-height:1}
+.add-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+.search-wrap{position:relative;margin-bottom:16px;animation:fadeUp .5s var(--spring) .1s both}
+.search-fi{width:100%;padding:10px 40px 10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:var(--text);outline:none;transition:all .2s var(--ease)}
+.search-fi:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(108,99,255,.1)}
+.search-fi::placeholder{color:var(--text3)}
+.search-ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text3);pointer-events:none}
+
+.sec-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;animation:fadeUp .5s var(--spring) .14s both}
+.sec-title{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px}
+.cnt-badge{background:var(--accent);color:#fff;font-size:10px;padding:2px 9px;border-radius:999px;font-weight:600}
+
+.notes-list{display:flex;flex-direction:column;gap:10px}
+
+.ncard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:15px 16px;cursor:pointer;transition:all .25s var(--ease);animation:cardIn .35s var(--spring) both;position:relative;overflow:hidden}
+@keyframes cardIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.ncard.removing{animation:cardOut .26s var(--ease) forwards}
+@keyframes cardOut{to{opacity:0;transform:scale(.92);max-height:0;padding:0;margin:0;border-width:0;overflow:hidden}}
+.ncard:hover{border-color:rgba(108,99,255,.3);transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.3)}
+.ncard.done{background:var(--done-bg);border-color:rgba(52,211,153,.25)}
+.ncard.done .ntext{text-decoration:line-through;color:var(--text2)}
+.ncard.editing{cursor:default}
+.ncard.editing:hover{transform:none;box-shadow:none}
+
+.n-row{display:flex;align-items:flex-start;gap:11px}
+.n-check{width:21px;height:21px;flex-shrink:0;margin-top:1px;border:1.5px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;transition:all .2s var(--spring);color:transparent}
+.n-check:hover{border-color:var(--accent);transform:scale(1.12)}
+.n-check.on{background:var(--done);border-color:var(--done);color:#0a0a12}
+.n-body{flex:1;min-width:0}
+.ntext{font-size:14px;line-height:1.55;color:var(--text);white-space:pre-wrap;word-break:break-word}
+.n-meta{font-size:10.5px;color:var(--text3);margin-top:8px;font-weight:500}
+.n-actions{display:flex;flex-shrink:0;gap:2px}
+.n-icon-btn{width:28px;height:28px;flex-shrink:0;border:none;background:transparent;color:var(--text3);cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .2s var(--ease)}
+.n-icon-btn:hover{background:var(--surface2);color:var(--text)}
+.n-icon-btn.del:hover{background:var(--danger-bg);color:var(--danger)}
+
+.edit-ta{width:100%;background:var(--surface2);border:1px solid var(--accent);border-radius:10px;padding:11px 13px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--text);outline:none;resize:vertical;min-height:60px;line-height:1.55;box-shadow:0 0 0 3px rgba(108,99,255,.12)}
+.edit-actions{display:flex;gap:8px;margin-top:10px;justify-content:flex-end}
+.edit-btn{padding:8px 16px;border-radius:8px;font-family:'Outfit',sans-serif;font-size:12.5px;font-weight:600;cursor:pointer;border:none;transition:all .2s var(--spring)}
+.edit-btn.save{background:var(--accent);color:#fff}
+.edit-btn.save:hover{background:var(--accent2)}
+.edit-btn.cancel{background:var(--surface2);color:var(--text2);border:1px solid var(--border)}
+.edit-btn.cancel:hover{background:var(--surface3)}
+
+.empty{text-align:center;padding:54px 20px;animation:fadeUp .4s ease both}
+.empty-ico{font-size:38px;margin-bottom:12px;opacity:.4}
+.empty-ttl{font-family:'Outfit',sans-serif;font-size:16px;font-weight:500;margin-bottom:5px}
+.empty-sub{font-size:12.5px;color:var(--text2)}
+
+.toast-wrap{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:999;display:flex;flex-direction:column;gap:6px;pointer-events:none;align-items:center}
+.toast{background:var(--surface3);border:1px solid var(--border2);color:var(--text);padding:9px 18px;border-radius:999px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:500;white-space:nowrap;animation:toastIn .28s var(--spring) both;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+@keyframes toastIn{from{opacity:0;transform:translateY(-12px) scale(.92)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="toast-wrap" id="toasts"></div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-ico">🗒️</div>
+    <h1>ملاحظات<span>ي</span></h1>
+    <p>دوّن أفكارك بسرعة، وهتفضل محفوظة عندك</p>
+  </div>
+
+  <div class="add-box">
+    <textarea class="add-ta" id="note-input" placeholder="اكتب ملاحظة جديدة هنا…" oninput="onInputChange()" onkeydown="onKeyDown(event)"></textarea>
+    <div class="add-row">
+      <span class="char-count" id="char-count"></span>
+      <button class="add-btn" id="add-btn" onclick="addNote()" disabled>
+        <span class="plus">+</span> إضافة
+      </button>
+    </div>
+  </div>
+
+  <div class="search-wrap">
+    <input class="search-fi" id="search-inp" type="text" placeholder="ابحث في ملاحظاتك…" oninput="renderNotes()">
+    <span class="search-ico">⌕</span>
+  </div>
+
+  <div class="sec-row">
+    <span class="sec-title">الملاحظات</span>
+    <span class="cnt-badge" id="notes-cnt">0</span>
+  </div>
+
+  <div class="notes-list" id="notes-list"></div>
+</div>
+
+<script>
+let notes = JSON.parse(localStorage.getItem('myNotes') || '[]');
+let editingId = null;
+
+function saveNotes(){
+  localStorage.setItem('myNotes', JSON.stringify(notes));
+}
+
+function onInputChange(){
+  const val = document.getElementById('note-input').value;
+  document.getElementById('add-btn').disabled = !val.trim();
+  document.getElementById('char-count').textContent = val.length ? val.length + ' حرف' : '';
+}
+function onKeyDown(e){
+  if(e.key === 'Enter' && (e.ctrlKey || e.metaKey)){
+    e.preventDefault();
+    addNote();
+  }
+}
+
+function addNote(){
+  const input = document.getElementById('note-input');
+  const text = input.value.trim();
+  if(!text){
+    toast('⚠️ متقدريش تضيفي ملاحظة فاضية');
+    return;
+  }
+  notes.unshift({
+    id: Date.now().toString(),
+    text,
+    done: false,
+    created: new Date().toISOString()
+  });
+  saveNotes();
+  input.value = '';
+  onInputChange();
+  renderNotes();
+  toast('✅ تمت إضافة الملاحظة');
+}
+
+function toggleDone(id, e){
+  e.stopPropagation();
+  if(editingId === id) return;
+  const n = notes.find(x => x.id === id);
+  if(!n) return;
+  n.done = !n.done;
+  saveNotes();
+  renderNotes();
+  toast(n.done ? '✔️ تمت الملاحظة' : '↩️ رجعت تاني');
+}
+
+function deleteNote(id, e){
+  e.stopPropagation();
+  const el = document.getElementById('nc-' + id);
+  if(el) el.classList.add('removing');
+  setTimeout(() => {
+    notes = notes.filter(x => x.id !== id);
+    saveNotes();
+    renderNotes();
+    toast('🗑️ تم حذف الملاحظة');
+  }, 260);
+}
+
+function startEdit(id, e){
+  if(e) e.stopPropagation();
+  editingId = id;
+  renderNotes();
+  const ta = document.getElementById('edit-ta-' + id);
+  if(ta){
+    ta.focus();
+    ta.setSelectionRange(ta.value.length, ta.value.length);
+  }
+}
+function cancelEdit(e){
+  if(e) e.stopPropagation();
+  editingId = null;
+  renderNotes();
+}
+function saveEdit(id, e){
+  if(e) e.stopPropagation();
+  const ta = document.getElementById('edit-ta-' + id);
+  const text = ta.value.trim();
+  if(!text){
+    toast('⚠️ متقدريش تسيبي الملاحظة فاضية');
+    return;
+  }
+  const n = notes.find(x => x.id === id);
+  n.text = text;
+  n.edited = new Date().toISOString();
+  editingId = null;
+  saveNotes();
+  renderNotes();
+  toast('✏️ تم تعديل الملاحظة');
+}
+
+function timeAgo(iso){
+  const d = new Date(iso);
+  const diff = Math.floor((Date.now() - d) / 1000);
+  if(diff < 60) return 'الآن';
+  if(diff < 3600) return 'من ' + Math.floor(diff/60) + ' دقيقة';
+  if(diff < 86400) return 'من ' + Math.floor(diff/3600) + ' ساعة';
+  const days = Math.floor(diff/86400);
+  if(days < 30) return 'من ' + days + ' يوم';
+  return d.toLocaleDateString('ar-EG');
+}
+
+function esc(s){
+  return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderNotes(){
+  const q = (document.getElementById('search-inp').value || '').toLowerCase();
+  let list = notes.filter(n => !q || n.text.toLowerCase().includes(q));
+  document.getElementById('notes-cnt').textContent = list.length;
+
+  const el = document.getElementById('notes-list');
+  if(!list.length){
+    el.innerHTML = notes.length
+      ? '<div class="empty"><div class="empty-ico">🔍</div><div class="empty-ttl">مفيش نتائج</div><div class="empty-sub">جربي كلمة بحث تانية</div></div>'
+      : '<div class="empty"><div class="empty-ico">📝</div><div class="empty-ttl">مفيش ملاحظات لسه</div><div class="empty-sub">اكتبي ملاحظتك الأولى فوق واضغطي إضافة</div></div>';
+    return;
+  }
+
+  el.innerHTML = list.map((n, i) => {
+    const isEditing = editingId === n.id;
+    const delay = 'animation-delay:' + (i * 0.04) + 's';
+    if(isEditing){
+      return `<div class="ncard editing" id="nc-${n.id}" style="${delay}">
+        <textarea class="edit-ta" id="edit-ta-${n.id}">${esc(n.text)}</textarea>
+        <div class="edit-actions">
+          <button class="edit-btn cancel" onclick="cancelEdit(event)">إلغاء</button>
+          <button class="edit-btn save" onclick="saveEdit('${n.id}', event)">💾 حفظ</button>
+        </div>
+      </div>`;
+    }
+    return `<div class="ncard ${n.done ? 'done' : ''}" id="nc-${n.id}" style="${delay}" onclick="toggleDone('${n.id}', event)">
+      <div class="n-row">
+        <div class="n-check ${n.done ? 'on' : ''}" onclick="toggleDone('${n.id}', event)">${n.done ? '✓' : ''}</div>
+        <div class="n-body">
+          <div class="ntext">${esc(n.text)}</div>
+          <div class="n-meta">${n.edited ? 'اتعدلت ' + timeAgo(n.edited) : timeAgo(n.created)}</div>
+        </div>
+        <div class="n-actions">
+          <button class="n-icon-btn" onclick="startEdit('${n.id}', event)" title="تعديل">✏️</button>
+          <button class="n-icon-btn del" onclick="deleteNote('${n.id}', event)" title="حذف">❌</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toast(msg){
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(() => {
+    el.style.animation = 'toastIn .28s var(--spring) reverse both';
+    setTimeout(() => el.remove(), 260);
+  }, 2200);
+}
+
+renderNotes();
+</script>
+</body>
+</html>

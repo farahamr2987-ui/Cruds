@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            background: linear-gradient(135deg, #fdf6ec 0%, #f3e7d9 100%);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            padding: 32px 16px;
+        }
+
+        #countaier {
+            width: 360px;
+            height: 360px;
+            border-radius: 16px;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #main {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .images {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .images img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .images img:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+        }
+
+        .images img.active {
+            border-color: #c98a4b;
+        }
+    </style>
+</head>
+<body>
+
+
+     
+
+
+      <div class="images">
+    <img id="img1" src="https://i.pinimg.com/736x/77/be/eb/77beeb584868332f6b63e3339370ab3e.jpg">
+    <img id="img2" src="https://i.pinimg.com/736x/c7/e2/59/c7e259b3a99a440bc9a87175715f03bb.jpg"  >
+    <img id="img3" src="https://i.pinimg.com/1200x/b9/f1/6d/b9f16decefad87792d946c4220535589.jpg"  >
+    <img id="img4" src="https://i.pinimg.com/736x/59/dc/12/59dc127479d860974e27c241a5efdc88.jpg"  >
+  </div>
+
+  <div id="countaier">
+    <img id="main" src="" >
+  </div>
+
+    
+<script>
+        let main = document.getElementById("main");
+
+    
+    let img1 = document.getElementById("img1");
+    let img2 = document.getElementById("img2");
+    let img3 = document.getElementById("img3");
+    let img4 = document.getElementById("img4");
+
+    
+
+     
+    img1.addEventListener("click", function() {
+      main.src = img1.src;
+      main.style.display = "inline-block";
+   
+    });
+
+    img2.addEventListener("click", function() {
+      main.src = img2.src;
+      main.style.display = "inline-block";
+   
+    });
+
+    img3.addEventListener("click", function() {
+      main.src = img3.src;
+      main.style.display = "inline-block"
+   
+    });
+
+    img4.addEventListener("click", function() {
+      main.src = img4.src
+      main.style.display = "inline-block"
+   
+    })
+</script>
+
+</body>
+</html>
+
+
